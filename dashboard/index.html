@@ -11,16 +11,23 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            width: 100%;
+            height: auto;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
+            width: 100%;
         }
 
         header {
@@ -71,6 +78,7 @@
             border-radius: 12px;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: visible;
         }
 
         .card h2 {
@@ -80,21 +88,6 @@
             border-bottom: 2px solid #667eea;
             padding-bottom: 10px;
         }
-
-        .status-badge {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .status-idle { background: #e0e7ff; color: #667eea; }
-        .status-analyzing { background: #fef3c7; color: #d97706; }
-        .status-running { background: #dbeafe; color: #0284c7; }
-        .status-completed { background: #dcfce7; color: #16a34a; }
-        .status-error { background: #fee2e2; color: #dc2626; }
 
         button {
             background: #667eea;
@@ -117,16 +110,6 @@
             cursor: not-allowed;
         }
 
-        .button-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .progress-container {
-            margin: 20px 0;
-        }
-
         .progress-bar {
             width: 100%;
             height: 8px;
@@ -141,42 +124,6 @@
             background: linear-gradient(90deg, #667eea, #764ba2);
             width: 0%;
             transition: width 0.3s;
-        }
-
-        .query-list {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .query-item {
-            background: #f9fafb;
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            border-left: 4px solid #667eea;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .query-item:hover {
-            background: #f3f4f6;
-        }
-
-        .query-item.selected {
-            background: #ede9fe;
-            border-left-color: #764ba2;
-        }
-
-        .query-item-title {
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 4px;
-            font-size: 14px;
-        }
-
-        .query-item-desc {
-            color: #666;
-            font-size: 12px;
         }
 
         .log-container {
@@ -198,7 +145,6 @@
 
         .log-success { color: #4ade80; }
         .log-info { color: #60a5fa; }
-        .log-warning { color: #facc15; }
         .log-error { color: #f87171; }
 
         .metrics-grid {
@@ -236,24 +182,12 @@
             font-weight: bold;
         }
 
-        .hypothesis-item {
+        .result-item {
             background: #f9fafb;
-            padding: 12px;
-            margin-bottom: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
             border-radius: 6px;
-            border-left: 4px solid #764ba2;
-        }
-
-        .hypothesis-number {
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 4px;
-        }
-
-        .hypothesis-desc {
-            color: #666;
-            font-size: 12px;
-            line-height: 1.4;
+            border-left: 4px solid #16a34a;
         }
 
         .code-block {
@@ -264,83 +198,23 @@
             font-family: monospace;
             font-size: 11px;
             overflow-x: auto;
-            margin-top: 8px;
+            margin: 10px 0;
         }
 
-        .results-section {
-            margin-top: 30px;
-        }
-
-        .result-item {
-            background: #f9fafb;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 6px;
-            border-left: 4px solid #16a34a;
-        }
-
-        .result-item.improved {
-            border-left-color: #16a34a;
-        }
-
-        .spinner {
+        .status-badge {
             display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid #e0e7ff;
-            border-top-color: #667eea;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: #999;
-        }
-
-        .empty-state-icon {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-
-        textarea {
-            width: 100%;
-            height: 100px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-family: monospace;
+            padding: 6px 12px;
+            border-radius: 20px;
             font-size: 12px;
-            resize: vertical;
+            font-weight: bold;
+            margin-bottom: 15px;
         }
 
-        .connection-status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 12px;
-            margin-top: 10px;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #ccc;
-        }
-
-        .status-dot.connected {
-            background: #10b981;
-        }
-
-        .status-dot.disconnected {
-            background: #ef4444;
-        }
+        .status-idle { background: #e0e7ff; color: #667eea; }
+        .status-analyzing { background: #fef3c7; color: #d97706; }
+        .status-running_autonomous { background: #dbeafe; color: #0284c7; }
+        .status-completed { background: #dcfce7; color: #16a34a; }
+        .status-error { background: #fee2e2; color: #dc2626; }
     </style>
 </head>
 <body>
@@ -357,37 +231,26 @@
             <!-- Left Panel: Query Selection -->
             <div class="card">
                 <h2>📊 Slow Queries</h2>
-                <div class="button-group">
-                    <button onclick="connectDatabase()">🔗 Connect DB</button>
+                <div style="margin-bottom: 15px;">
+                    <button onclick="connectDatabase()" style="margin-right: 10px;">🔗 Connect DB</button>
                     <button onclick="loadQueries()">Reload Queries</button>
                 </div>
 
-                <div class="connection-status">
-                    <div class="status-dot" id="dbStatusDot"></div>
-                    <span id="dbStatus">Disconnected</span>
+                <div id="queryList" style="max-height: 300px; overflow-y: auto; margin-bottom: 20px;">
+                    <p style="color: #999; padding: 20px; text-align: center;">Click "Connect DB" to load queries</p>
                 </div>
 
-                <div class="query-list" id="queryList">
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📁</div>
-                        <p>Connect to database to load queries</p>
-                    </div>
-                </div>
-
-                <div style="margin-top: 20px;">
-                    <h3 style="margin-bottom: 10px; color: #333;">Custom Query</h3>
-                    <textarea id="customQuery" placeholder="Paste your SQL query here..."></textarea>
-                    <button onclick="analyzeCustomQuery()" style="margin-top: 10px; width: 100%;">Analyze Query</button>
-                </div>
+                <h3 style="margin-bottom: 10px; color: #333; font-size: 14px;">Custom Query</h3>
+                <textarea id="customQuery" placeholder="Paste your SQL query here..." style="width: 100%; height: 100px; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 12px; margin-bottom: 10px;"></textarea>
+                <button onclick="analyzeCustomQuery()" style="width: 100%;">Analyze Query</button>
             </div>
 
-            <!-- Right Panel: Analysis & Results -->
+            <!-- Right Panel: Analysis -->
             <div class="card">
                 <h2>🔍 Analysis & Progress</h2>
-
                 <div class="status-badge" id="statusBadge">idle</div>
 
-                <div class="progress-container">
+                <div style="margin-bottom: 15px;">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
                         <span style="font-size: 12px; color: #666;">Progress</span>
                         <span id="progressPercent" style="font-size: 12px; color: #667eea; font-weight: bold;">0%</span>
@@ -397,45 +260,19 @@
                     </div>
                 </div>
 
-                <h3 style="margin-top: 20px; margin-bottom: 10px; color: #333; font-size: 14px;">Optimization Logs</h3>
+                <h3 style="margin-bottom: 10px; color: #333; font-size: 14px;">Optimization Logs</h3>
                 <div class="log-container" id="logContainer">
-                    <div class="empty-state">
-                        <p style="font-size: 12px;">Logs will appear here during optimization...</p>
-                    </div>
+                    <p style="font-size: 12px; color: #999;">Logs will appear here during optimization...</p>
                 </div>
 
-                <div style="margin-top: 15px;">
-                    <button onclick="startAutonomousOptimization()" id="optimizeBtn" style="width: 100%;">
-                        🤖 Start Autonomous Optimization
-                    </button>
-                </div>
+                <button onclick="startAutonomousOptimization()" id="optimizeBtn" style="width: 100%; margin-top: 15px;">
+                    🤖 Start Autonomous Optimization
+                </button>
             </div>
         </div>
 
-        <!-- Analysis Results -->
-        <div class="card" id="analysisCard" style="display: none;">
-            <h2>📈 Optimization Analysis Results</h2>
-
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-label">Execution Time</div>
-                    <div class="metric-value" id="metricTime">-</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-label">Expected Improvement</div>
-                    <div class="metric-value"><span class="improvement-badge" id="metricImprovement">-</span></div>
-                </div>
-            </div>
-
-            <h3 style="margin-top: 20px; margin-bottom: 10px; color: #333; font-size: 14px;">🔬 Generated Hypotheses</h3>
-            <div id="hypothesesContainer"></div>
-
-            <h3 style="margin-top: 20px; margin-bottom: 10px; color: #333; font-size: 14px;">📋 AI Analysis</h3>
-            <div id="analysisText" style="background: #f9fafb; padding: 15px; border-radius: 6px; color: #666; font-size: 13px; line-height: 1.6; max-height: 300px; overflow-y: auto;"></div>
-        </div>
-
-        <!-- Completed Optimizations -->
-        <div class="card results-section" id="resultsSection" style="display: none;">
+        <!-- Results Section -->
+        <div class="card" id="resultsSection" style="display: none;">
             <h2>✨ Optimization Results</h2>
             <div id="resultsContainer"></div>
         </div>
@@ -445,40 +282,11 @@
         let selectedQuery = null;
         let optimizationInProgress = false;
 
-        // Check database connection on load
-        window.addEventListener('load', () => {
-            checkDatabaseStatus();
-            setInterval(updateOptimizationStatus, 1000);
-        });
-
-        async function checkDatabaseStatus() {
-            try {
-                const response = await fetch('/api/health');
-                const data = await response.json();
-                updateConnectionStatus(data.database === 'connected');
-            } catch (e) {
-                updateConnectionStatus(false);
-            }
-        }
-
-        function updateConnectionStatus(connected) {
-            const dot = document.getElementById('dbStatusDot');
-            const status = document.getElementById('dbStatus');
-            if (connected) {
-                dot.className = 'status-dot connected';
-                status.textContent = 'Connected';
-            } else {
-                dot.className = 'status-dot disconnected';
-                status.textContent = 'Disconnected';
-            }
-        }
-
         async function connectDatabase() {
             try {
                 const response = await fetch('/api/db/connect', { method: 'POST' });
                 const data = await response.json();
                 alert(data.message || 'Connection status: ' + data.status);
-                updateConnectionStatus(data.status === 'connected');
                 loadQueries();
             } catch (e) {
                 alert('Connection failed: ' + e.message);
@@ -489,89 +297,52 @@
             try {
                 const response = await fetch('/api/queries/slow');
                 const queries = await response.json();
-
                 const queryList = document.getElementById('queryList');
-                queryList.innerHTML = '';
+                queryList.innerHTML = queries.map((q, i) => `
+                    <div class="query-item" data-index="${i}" style="background: ${i === 0 ? '#e0e7ff' : '#f0f4ff'}; padding: 12px; margin-bottom: 10px; border-radius: 6px; cursor: pointer;">
+                        <strong style="color: #333;">${q.name}</strong>
+                        <p style="color: #666; font-size: 12px; margin: 4px 0;">${q.description}</p>
+                        <p style="color: #999; font-size: 11px;">⏱️ ${q.metrics?.execution_time_ms || 'N/A'} ms</p>
+                    </div>
+                `).join('');
 
-                queries.forEach((query, index) => {
-                    const item = document.createElement('div');
-                    item.className = 'query-item';
-                    if (index === 0) item.classList.add('selected');
-
-                    item.innerHTML = `
-                        <div class="query-item-title">${query.name}</div>
-                        <div class="query-item-desc">${query.description}</div>
-                        <div style="font-size: 11px; color: #999; margin-top: 4px;">
-                            ⏱️ ${query.metrics.execution_time_ms || 'N/A'} ms
-                        </div>
-                    `;
-
-                    item.onclick = () => selectQuery(query, index);
-                    queryList.appendChild(item);
-
-                    if (index === 0) selectQuery(query, index);
+                // Add click handlers
+                document.querySelectorAll('.query-item').forEach((item, idx) => {
+                    item.addEventListener('click', function() {
+                        document.querySelectorAll('.query-item').forEach(el => el.style.background = '#f0f4ff');
+                        this.style.background = '#e0e7ff';
+                        selectedQuery = {
+                            id: queries[idx].id || 'slow_q' + (idx + 1),
+                            query: queries[idx].query || ''
+                        };
+                    });
                 });
+
+                if (queries.length > 0) {
+                    selectedQuery = {
+                        id: queries[0].id || 'slow_q1',
+                        query: queries[0].query || ''
+                    };
+                }
             } catch (e) {
                 alert('Failed to load queries: ' + e.message);
             }
         }
 
-        function selectQuery(query, index) {
-            selectedQuery = query;
-
-            // Update selection UI
-            document.querySelectorAll('.query-item').forEach((item, i) => {
-                item.classList.toggle('selected', i === index);
-            });
-
-            // Update metrics display
-            if (query.metrics) {
-                document.getElementById('metricTime').textContent =
-                    query.metrics.execution_time_ms + ' ms';
-            }
-
-            console.log('Selected query:', query);
-        }
-
         async function analyzeCustomQuery() {
-            const queryText = document.getElementById('customQuery').value;
-            if (!queryText) {
-                alert('Please enter a query');
-                return;
-            }
-
-            await analyzeQuery({
-                id: 'custom',
-                name: 'Custom Query',
-                description: 'User-provided query',
-                query: queryText,
-                metrics: {}
-            });
-        }
-
-        async function analyzeQuery(query) {
-            if (!query) return;
-
+            const query = document.getElementById('customQuery').value;
+            if (!query) { alert('Please enter a query'); return; }
             try {
                 document.getElementById('optimizeBtn').disabled = true;
                 setStatus('analyzing');
                 updateProgress(20);
-
                 const response = await fetch('/api/analyze/query', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ query: query.query })
+                    body: JSON.stringify({ query })
                 });
-
                 if (!response.ok) throw new Error('Analysis failed');
-
-                const analysis = await response.json();
-
-                // Display analysis
-                document.getElementById('analysisCard').style.display = 'block';
-                displayAnalysis(analysis);
                 updateProgress(100);
-
                 document.getElementById('optimizeBtn').disabled = false;
             } catch (e) {
                 alert('Analysis failed: ' + e.message);
@@ -579,66 +350,31 @@
             }
         }
 
-        function displayAnalysis(analysis) {
-            // Update metrics
-            if (analysis.metrics_before) {
-                document.getElementById('metricTime').textContent =
-                    analysis.metrics_before.execution_time_ms + ' ms';
-            }
-
-            // Display hypotheses
-            const hypothesesContainer = document.getElementById('hypothesesContainer');
-            hypothesesContainer.innerHTML = '';
-
-            if (analysis.hypotheses && analysis.hypotheses.length > 0) {
-                analysis.hypotheses.forEach((hyp, i) => {
-                    const item = document.createElement('div');
-                    item.className = 'hypothesis-item';
-                    item.innerHTML = `
-                        <div class="hypothesis-number">Hypothesis ${hyp.hypothesis_id || i + 1}</div>
-                        <div class="hypothesis-desc">${hyp.description}</div>
-                        ${hyp.index_statements && hyp.index_statements[0] ?
-                            `<div class="code-block">${escapeHtml(hyp.index_statements[0])}</div>` : ''}
-                    `;
-                    hypothesesContainer.appendChild(item);
-                });
-            }
-
-            // Display analysis text
-            document.getElementById('analysisText').textContent = analysis.analysis || 'No analysis available';
-        }
-
         async function startAutonomousOptimization() {
-            if (!selectedQuery) {
-                alert('Please select a query first');
-                return;
-            }
-
+            if (!selectedQuery) { alert('Please select a query first'); return; }
             optimizationInProgress = true;
             document.getElementById('optimizeBtn').disabled = true;
 
             try {
                 setStatus('running_autonomous');
                 updateProgress(0);
-                clearLogs();
+                document.getElementById('logContainer').innerHTML = '<p style="font-size: 12px;">Starting optimization...</p>';
 
                 const response = await fetch('/api/optimize/autonomous', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         query: selectedQuery.query,
-                        query_id: selectedQuery.id || 'unknown'
+                        query_id: selectedQuery.id
                     })
                 });
 
                 if (!response.ok) throw new Error('Optimization failed');
 
-                // Poll for updates
                 while (optimizationInProgress) {
                     await updateOptimizationStatus();
                     await new Promise(r => setTimeout(r, 500));
                 }
-
             } catch (e) {
                 alert('Optimization failed: ' + e.message);
             } finally {
@@ -650,32 +386,26 @@
             try {
                 const response = await fetch('/api/optimization/status');
                 const status = await response.json();
-
                 updateProgress(status.progress);
                 setStatus(status.status);
 
-                // Update logs
                 const logContainer = document.getElementById('logContainer');
                 if (status.logs && status.logs.length > 0) {
-                    logContainer.innerHTML = status.logs.map(log => {
+                    logContainer.innerHTML = status.logs.slice(-20).map(log => {
                         let logClass = 'log-info';
-                        if (log.includes('✅') || log.includes('SUCCESS')) logClass = 'log-success';
+                        if (log.includes('✅')) logClass = 'log-success';
                         if (log.includes('ERROR') || log.includes('❌')) logClass = 'log-error';
-                        if (log.includes('WARNING')) logClass = 'log-warning';
-
                         return `<div class="log-entry ${logClass}">${escapeHtml(log)}</div>`;
                     }).join('');
                     logContainer.scrollTop = logContainer.scrollHeight;
                 }
 
-                // Check if complete
                 if (status.status === 'completed') {
                     optimizationInProgress = false;
                     displayOptimizations();
                 } else if (status.status === 'error') {
                     optimizationInProgress = false;
                 }
-
             } catch (e) {
                 console.error('Status update failed:', e);
             }
@@ -685,7 +415,6 @@
             try {
                 const response = await fetch('/api/optimizations');
                 const optimizations = await response.json();
-
                 if (optimizations.length === 0) return;
 
                 document.getElementById('resultsSection').style.display = 'block';
@@ -693,23 +422,32 @@
                 container.innerHTML = '';
 
                 optimizations.forEach(opt => {
+                    let queryName = opt.query_id;
+                    if (opt.query_id === 'slow_q1') queryName = '🔄 Customer Transfer History';
+                    else if (opt.query_id === 'slow_q2') queryName = '💰 Loan Payment Summary';
+                    else if (opt.query_id === 'slow_q3') queryName = '🚨 Fraud Detection';
+                    else if (opt.query_id === 'slow_q4') queryName = '✔️ Account Balance';
+
+                    const baselineTime = opt.baseline_metrics?.error ? 'N/A (simulated)' : (opt.baseline_metrics?.execution_time_ms || 'N/A') + ' ms';
+                    const indexStatements = (opt.best_optimization?.index_statements || []).map(idx =>
+                        `<div class="code-block">${escapeHtml(idx)}</div>`
+                    ).join('');
+
                     const item = document.createElement('div');
-                    item.className = 'result-item improved';
+                    item.className = 'result-item';
                     item.innerHTML = `
-                        <h3 style="margin-bottom: 10px; color: #333;">${opt.query_id}</h3>
+                        <h3 style="margin-bottom: 15px; color: #333; font-size: 16px;">${queryName}</h3>
                         <div class="metrics-grid">
-                            <div class="metric-card">
-                                <div class="metric-label">Baseline Time</div>
-                                <div class="metric-value">${opt.baseline_metrics?.execution_time_ms || 'N/A'} ms</div>
-                            </div>
-                            <div class="metric-card">
-                                <div class="metric-label">Expected Improvement</div>
-                                <div class="metric-value"><span class="improvement-badge">${opt.expected_improvement_percent || 0}%</span></div>
-                            </div>
+                            <div class="metric-card"><div class="metric-label">Baseline</div><div class="metric-value">${baselineTime}</div></div>
+                            <div class="metric-card"><div class="metric-label">Expected Improvement</div><div class="metric-value"><span class="improvement-badge">${opt.expected_improvement_percent || 0}%</span></div></div>
                         </div>
-                        <h4 style="margin-top: 15px; margin-bottom: 10px; color: #333; font-size: 13px;">Best Optimization</h4>
-                        <div style="background: #f0fdf4; padding: 10px; border-radius: 4px; font-size: 12px;">
-                            ${opt.best_optimization?.description || 'N/A'}
+                        <h4 style="margin-top: 15px; margin-bottom: 10px; color: #333; font-size: 14px;">🏆 Best Optimization</h4>
+                        <p style="background: #f0fdf4; padding: 10px; border-radius: 4px; color: #333; font-size: 12px; margin-bottom: 15px;">${opt.best_optimization?.description || 'N/A'} - <strong>${opt.best_optimization?.simulated_improvement_percent || 0}% improvement</strong></p>
+                        <h4 style="margin-bottom: 10px; color: #333; font-size: 14px;">📋 Recommended Indexes</h4>
+                        ${indexStatements || '<p style="color: #999;">No index statements</p>'}
+                        <h4 style="margin-top: 15px; margin-bottom: 10px; color: #333; font-size: 14px;">📄 Professional Report</h4>
+                        <div style="background: #f9fafb; padding: 15px; border-radius: 6px; border-left: 4px solid #667eea; font-size: 12px; line-height: 1.8; color: #333; white-space: pre-wrap; word-wrap: break-word; max-height: 800px; overflow-y: auto;">
+                            ${escapeHtml(opt.report || 'No report available')}
                         </div>
                     `;
                     container.appendChild(item);
@@ -730,16 +468,14 @@
             document.getElementById('progressPercent').textContent = percent + '%';
         }
 
-        function clearLogs() {
-            document.getElementById('logContainer').innerHTML =
-                '<div class="empty-state"><p style="font-size: 12px;">Starting optimization...</p></div>';
-        }
-
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
+
+        // Load queries on page load
+        window.addEventListener('load', loadQueries);
     </script>
 </body>
 </html>

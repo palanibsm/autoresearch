@@ -39,7 +39,7 @@ class QueryOptimizer:
         """
 
         response = self.client.messages.create(
-            model="claude-3-5-sonnet-20241022",
+            model="claude-opus-4-1",
             max_tokens=2000,
             system="You are a PostgreSQL query optimization expert working in an autoresearch system. You generate optimization hypotheses and suggest specific, testable improvements. Format your response with clear sections for HYPOTHESIS 1, HYPOTHESIS 2, HYPOTHESIS 3.",
             messages=[{"role": "user", "content": analysis_prompt}]
@@ -84,7 +84,7 @@ class QueryOptimizer:
         """
 
         response = self.client.messages.create(
-            model="claude-3-5-sonnet-20241022",
+            model="claude-opus-4-1",
             max_tokens=2000,
             system="You are a PostgreSQL query optimization expert. Refine optimization recommendations based on test results.",
             messages=self.conversation_history + [
@@ -149,7 +149,7 @@ class QueryOptimizer:
         """
 
         response = self.client.messages.create(
-            model="claude-3-5-sonnet-20241022",
+            model="claude-opus-4-1",
             max_tokens=1500,
             system="You are a database optimization consultant. Generate clear, actionable reports.",
             messages=self.conversation_history + [
@@ -180,7 +180,7 @@ class QueryOptimizer:
         """
 
         response = self.client.messages.create(
-            model="claude-3-5-sonnet-20241022",
+            model="claude-opus-4-1",
             max_tokens=1500,
             system="You are an expert SQL query writer optimizing for PostgreSQL. Return only the rewritten query with brief inline comments.",
             messages=[

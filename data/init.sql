@@ -115,8 +115,8 @@ INSERT INTO accounts (customer_id, account_type, balance, currency, status) VALU
 -- Generate transactions (bulk insert for realistic load)
 INSERT INTO transactions (from_account_id, to_account_id, amount, currency, transaction_type, status, description)
 SELECT
-    (random() % 15) + 1 as from_account,
-    (random() % 15) + 1 as to_account,
+    (floor(random() * 15)::int) + 1 as from_account,
+    (floor(random() * 15)::int) + 1 as to_account,
     (random() * 10000 + 100)::DECIMAL as amount,
     CASE WHEN random() > 0.3 THEN 'SGD' ELSE 'MYR' END as currency,
     CASE WHEN random() > 0.5 THEN 'TRANSFER' ELSE 'PAYMENT' END as type,
@@ -127,25 +127,25 @@ FROM generate_series(1, 500);
 -- Generate loans
 INSERT INTO loans (customer_id, principal_amount, interest_rate, term_months, status, disbursement_date, maturity_date)
 SELECT
-    (customer_id % 10) + 1 as customer_id,
+    ((generate_series(1, 50) - 1) % 10) + 1 as customer_id,
     (random() * 500000 + 50000)::DECIMAL as principal,
     (random() * 5 + 2)::DECIMAL as interest_rate,
-    (random() * 300 + 12)::INTEGER as term,
+    (floor(random() * 300) + 12)::INTEGER as term,
     CASE WHEN random() > 0.2 THEN 'ACTIVE' ELSE 'CLOSED' END as status,
-    CURRENT_DATE - INTERVAL '1 day' * (random() * 730)::INTEGER as disburse_date,
-    CURRENT_DATE + INTERVAL '1 day' * (random() * 730)::INTEGER as mature_date
-FROM generate_series(1, 50) as customer_id;
+    CURRENT_DATE - INTERVAL '1 day' * (floor(random() * 730))::INTEGER as disburse_date,
+    CURRENT_DATE + INTERVAL '1 day' * (floor(random() * 730))::INTEGER as mature_date
+FROM (SELECT generate_series(1, 50)) as t(customer_id);
 
 -- Generate loan payments
 INSERT INTO loan_payments (loan_id, amount, payment_date, principal_paid, interest_paid, status)
 SELECT
-    (loan_id % 50) + 1 as loan_id,
+    ((generate_series(1, 200) - 1) % 50) + 1 as loan_id,
     (random() * 5000 + 1000)::DECIMAL as amount,
-    CURRENT_DATE - INTERVAL '1 day' * (random() * 365)::INTEGER as payment_date,
+    CURRENT_DATE - INTERVAL '1 day' * (floor(random() * 365))::INTEGER as payment_date,
     (random() * 4000 + 500)::DECIMAL as principal,
     (random() * 1500 + 100)::DECIMAL as interest,
     CASE WHEN random() > 0.1 THEN 'COMPLETED' ELSE 'PENDING' END as status
-FROM generate_series(1, 200) as loan_id;
+FROM (SELECT generate_series(1, 200)) as t(loan_id);
 
 -- Generate fraud alerts
 INSERT INTO fraud_alerts (transaction_id, customer_id, alert_type, risk_score, status, notes)
